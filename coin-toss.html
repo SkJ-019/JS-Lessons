@@ -6,35 +6,68 @@
 <body>
   <p>Take a guess!</p>
   <button onclick="
-      randomNumber = Math.random();
-      if(randomNumber>0 && randomNumber<0.5){
-        computerMove='Heads';
-        result = 'You guessed correctly!';
-      }
-      else{
-        computerMove='Tails';
-        result = 'You guessed incorrectly!';
-      }
-      alert(`You picked Heads. Correct guess ${computerMove}. ${result}.`);
+    playGame('heads');
   ">Heads</button>
 
   <button onclick="
-   randomNumber = Math.random();
-      if(randomNumber>0 && randomNumber<0.5){
-        computerMove='Heads';
-        result = 'You guessed incorrectly!';
-      }
-      else{
-        computerMove='Tails';
-        result = 'You guessed correctly!';
-      }
-      alert(`You picked Tails. Correct guess ${computerMove}. ${result}.`);
+    playGame('tails');
   ">Tails</button>
 
+  <button onclick="
+    score.wins = 0;
+    score.loses = 0;
+  ">Reset Score</button>
+
   <script>
-    let randomNumber;
-    let result = '';
-    let computerMove= '';
+    const score = JSON.parse(localStorage.getItem('score')) || {
+      wins: 0,
+      loses: 0
+    };
+    /*
+    The default operator (||) checks if the values of the properties wins and loses are null or not, if they are it will assign 0 to them. We can use an if statement here but the default operator shortens the code.
+    */
+
+    function playGame(playerMove){
+      const randomNumber = Math.random();
+      let result = '';
+      let computerMove= '';
+
+      if (playerMove === 'heads'){
+        
+        if(randomNumber>0 && randomNumber<0.5){
+          computerMove='Heads';
+          result = 'You guessed correctly!';
+        }
+        else{
+          computerMove='Tails';
+          result = 'You guessed incorrectly!';
+        }
+      }
+
+      if (playerMove === 'tails'){
+        if(randomNumber>0 && randomNumber<0.5){
+          computerMove='Heads';
+          result = 'You guessed incorrectly!';
+        }
+        else{
+          computerMove='Tails';
+          result = 'You guessed correctly!';
+        }
+      }
+
+      if (result === 'You guessed correctly!'){
+        score.wins += 1;
+      } else {
+        score.loses += 1;
+      }
+
+      localStorage.setItem('score', JSON.stringify(score));
+
+      alert(`
+      You picked ${playerMove}. Correct guess ${computerMove}. ${result}.
+      Wins: ${score.wins}. Loses: ${score.loses}.
+      `);
+    }
   </script>
 </body>
 </html>
