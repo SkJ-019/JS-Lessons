@@ -6,6 +6,7 @@
   Lesson 06 
   (Updated in lesson 07)
   (Updated in lesson 08)
+  (Updated in lesson 09)
   -->
 </head>
 <body>
@@ -23,13 +24,29 @@
       playGame('scissors');
     ">Scissors</button>
 
-    <button onclick="
-      score.wins = 0;
-      score.loses = 0;
-      score.ties = 0;
-      localStorage.removeItem('score');
-    ">Reset Score</button>
   </p>
+  <p class="p-result">
+      
+  </p>
+
+  <p class="p-moves"> 
+
+  </p>
+
+  <p class="p-scores">
+    Wins: 0. Loses: 0. Ties: 0
+  </p>
+
+  <p> 
+    <button onclick="
+    score.wins = 0;
+    score.loses = 0;
+    score.ties = 0;
+    localStorage.removeItem('score');
+    updateScore();
+  ">Reset Score</button>
+  </p>
+
   <script>
    let score = JSON.parse(localStorage.getItem('score'));
    if (score === null){
@@ -42,7 +59,6 @@
     Without this, the code won't work because we'd have null values in the properties wins, loses and ties so to solve that we check if the object is null, if it is then assign 0 to all properties.
     */
    }
-
     function playGame(playerMove){
       const computerMove = pickComputerMove();
       let result = '';
@@ -94,12 +110,22 @@
       }
 
       localStorage.setItem('score', JSON.stringify(score));
-
-      alert(`
+/*
+        alert(`
         You picked ${playerMove}. Computer picked ${computerMove}. ${result}
         Wins: ${score.wins}. Loses: ${score.loses}. Ties: ${score.ties}.
         `);
+      */
 
+      document.querySelector('.p-result').innerHTML = result;
+
+      document.querySelector('.p-moves').innerHTML = `You picked ${playerMove}. Computer picked ${computerMove}.`;
+
+      updateScore();
+      
+    }
+    function updateScore(){
+      document.querySelector('.p-scores').innerHTML = `Wins: ${score.wins}. Loses: ${score.loses}. Ties: ${score.ties}`;
     }
 
     function pickComputerMove() {

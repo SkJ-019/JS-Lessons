@@ -1,21 +1,50 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <title>Cart Quantity</title> <!--Lesson 05-->
+  <title>Cart Quantity</title> 
+  <!--
+  Lesson 05
+  (Updated in lesson 09)
+  -->
 </head>
 <body>
   <P>Cart quantity</P>
-  <button onclick="console.log(`Cart Quantity: ${quantity}`)">Show quantity</button>
-  <button onclick="console.log(`Cart Quantity: ${quantity += 1}`)">Add to cart</button>
-  <button onclick="console.log(`Cart Quantity: ${quantity += 2}`)">+2</button>
-  <button onclick="console.log(`Cart Quantity: ${quantity += 3}`)">+3</button>
   <button onclick="
-  console.log(`Cart was reset`);
-  console.log(`Cart Quantity: ${quantity}`);
+   updateCart();
+  ">Show quantity</button>
+
+  <button onclick="
+    quantity += 1;
+    updateCart();
+  ">Add to cart</button>
+
+  <button onclick="
+    quantity += 2;
+    updateCart();
+ ">+2</button>
+
+  <button onclick="
+    quantity += 3;
+    updateCart();
+  ">+3</button>
+
+  <button onclick="
+   quantity = 0;
+   document.querySelector('.p-reset').innerHTML = 'Cart was reset';
+   updateCart();
   ">Reset Cart</button>
 
+  <p class="p-reset">
+ 
+  </p>
+  <p class="p-quantity">
+    Cart quantity: 0
+  </p>
   <script>
     let quantity=0;
+    function updateCart(){
+      document.querySelector('.p-quantity').innerHTML = `Cart quantity: ${quantity}`;
+    }
   </script>
 </body>
 </html>
