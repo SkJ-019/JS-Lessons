@@ -1,0 +1,25 @@
+body{
+  color: white;
+}
+.container{
+  height: 260px;
+  width: 160px;
+  background-color: rgb(25, 25, 25);
+  padding: 10px 10px 30px 20px;
+  border-radius: 10px;
+}
+.display-area{
+  height: 20px;
+  font-size: 20px;
+  font-weight: bold;
+}
+button{
+  background-color: rgb(116, 114, 114);
+  color: white;
+  border: none;
+  padding: 8px 13px;
+  border-radius: 20px;
+}
+.orange-button{
+  background-color: orange;
+}
