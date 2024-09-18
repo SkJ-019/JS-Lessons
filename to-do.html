@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="to-do.css">
+  <title>To-Do List</title>
+</head>
+<body>
+  <p>To-Do List</p>
+  <div class="header">
+    <input class="todo-input" type="text" placeholder="Task name">
+    <input class="todo-date" type="date">
+    <button class="add-button" onclick="
+      addTask();
+    ">Add</button>
+  </div>
+  <div class="display-area">
+
+  </div>
+  <script>
+    const todoArray = JSON.parse(localStorage.getItem('todoArray')) || [];
+    function addTask(){
+      const inputValue = document.querySelector('.todo-input');
+      const name = inputValue.value;
+      const inputDate = document.querySelector('.todo-date');
+      const date = inputDate.value;
+      todoArray.push({
+        name,
+        date
+      });
+      inputValue.value = '';
+      displayLoop();
+
+      localStorage.setItem('todoArray', JSON.stringify(todoArray));
+    }
+
+    function displayLoop(){
+      let todolist = '';
+      todoArray.forEach(function(todoObject, index){
+        const {name, date} = todoObject;
+        let html = `<div>${name}</div> 
+        <div>${date}</div> 
+        <button class="del-button"
+        onclick="
+          todoArray.splice(${index}, 1);
+          displayLoop();
+        "
+        "> Delete </button>`;
+        todolist += html;
+      })
+      /*
+      for(let i = 0; i < todoArray.length; i++){
+        const todoObject = todoArray[i];
+        const {name, date} = todoObject;
+        let html = `<div>${name}</div> 
+        <div>${date}</div> 
+        <button class="del-button"
+        onclick="
+          todoArray.splice(${i}, 1);
+          displayLoop();
+        "
+        "> Delete </button>`;
+        todolist += html;
+      }
+        */
+      document.querySelector('.display-area').innerHTML = todolist;
+    }
+  </script>
+</body>
+</html>

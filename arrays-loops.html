@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Arrays and loops</title>
+</head>
+<body>
+  
+  <script>
+    let array1 = [1,2,3];
+    let array2 = [11, 1, 12];
+    function addNUm(array1, array2){
+      let newArray = [];
+      for(let i = 0; i < array1.length; i++){
+        let value = array1[i];
+        let value2 = array2[i];
+        value += value2;
+        newArray.push(value);
+      }
+      console.log(newArray);
+    }
+    let array3 = [1, 2, -8, 9];
+    function findPositive(array){
+      let count = 0;
+      for(let i = 0; i < array.length; i++){
+         let value = array[i];
+         if (value > 0){
+          count++;
+         }
+      }
+      console.log(count);
+    }
+    function minMax(array){
+      let min = 0;
+      let max = 0;
+      for(let i = 0; i < array.length; i++){
+        let num = array[i];
+        if (min > num){
+          min = num;
+        }
+        else if (max < num){
+          max = num;
+        }
+      }
+      console.log(`Min: ${min}, Max: ${max}`);
+    }
+    for(let i = 1; i < 20; i++){
+      if(i % 3 === 0 && i % 5 === 0){
+        console.log('FizzBuzz');
+      } else if(i % 5 === 0){
+        console.log('Buzz');
+      } else if (i % 3 === 0){
+        console.log('Fizz');
+      } else{
+        console.log(i);
+      }
+     
+    }
+
+    function findIndex(array, word){
+      for(let i = 0; i < array.length; i++){
+        if(array[i] === word){
+          return i;
+        }
+      }
+      return -1;
+    }
+    function unique(array){
+      const result = [];
+      for(let i = 0; i < array.length; i++){
+        const word = array[i];
+        if(findIndex(result, word) === -1){
+          result.push(word);
+        }
+      }
+      return result;
+    }
+    console.log(unique([1, 2, 1, 4]));
+  </script>
+  
+</body>
+</html>

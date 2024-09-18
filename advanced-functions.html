@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Adv Functions</title>
+</head>
+<body>
+  <button class="start-button" onclick="
+    load();
+    ">Start</button>
+    <button class="add-button" onclick="addFunction();">Add to Cart</button>
+    <p class="p-add"></p>
+    <button onclick="
+    messages++;
+    displayNotification();
+  ">Add</button>
+
+  <button onclick="
+    if (messages > 0) {
+      messages--;
+
+      // If there are no new messages, stop displaying
+      // the notification in the tab.
+      if (messages === 0) {
+        stopNotification();
+      }
+    }
+  ">Remove</button>
+  <script>
+    let messages = 2;
+    let intervalID;
+    let isDisplayingNotification;
+    displayNotification();
+    function displayNotification(){
+      if(isDisplayingNotification){
+        return;
+      }
+      isDisplayingNotification = true;
+
+      intervalID = setInterval(function(){
+        if (document.title === 'Adv Functions') {
+            document.title = `(${messages}) New messages`;
+          } else {
+            document.title = 'Adv Functions';
+          }
+      }, 2000);
+    }
+    function stopNotification() {
+        isDisplayingNotification = false;
+
+        clearInterval(intervalId);
+        document.title = 'Adv Functions';
+      }
+
+    function load(){
+      document.querySelector('.start-button').innerHTML = 'loading..';
+      setTimeout(function(){
+        document.querySelector('.start-button').innerHTML = 'Finished!';
+      }, 1000);
+    }
+    let isAdded = false;
+    let addID;
+    function addFunction(){
+      if(!isAdded){
+        addID = setTimeout(function(){
+        document.querySelector('.p-add').innerHTML = 'Added';
+      }, 2000);
+      isAdded = true;
+      }else{
+        clearTimeout(addID);
+        isAdded = false;
+        addID = setTimeout(function(){
+        document.querySelector('.p-add').innerHTML = '';
+      }, 2000);
+      }
+    }
+  </script>
+</body>
+</html>
